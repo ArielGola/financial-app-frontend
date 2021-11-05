@@ -48,6 +48,7 @@ function App() {
         <Route path="/create" component={CreateGoal} />
         <Route path="/expenses" exact component={ShowExpenses} />
         <Route path="/expenses/edit/:id" component={InputExpenses} />
+        <Route path="/expenses/create" component={InputExpenses} />
         <Route path="/calculator" component={Calculator} />
         <Route path="/log" component={Login} />
         <Route path="/reg" component={Register} />

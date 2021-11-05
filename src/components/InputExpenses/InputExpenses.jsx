@@ -25,25 +25,35 @@ function InputExpenses(props) {
   const [isEdit, setIsEdit] = useState(true);
 
   async function getData() {
-    if (props.match.params.id) {
-      const response = await Axios.get(
-        "http://localhost:4000/api/financial/expenses"
-      );
+    try {
+      if (props.match.params.id) {
+        
+        const response = await Axios.get(
+          "http://localhost:4000/api/financial/expenses"
+        );
+  
+        setSalary(response.data[0].incomes.salary);
+        setOtherIncome(response.data[0].incomes.otherIncome);
+        setMortgage(response.data[0].apartment.mortgage);
+        setRental(response.data[0].apartment.rental);
+        setChildcare(response.data[0].childcare);
+        setClothing(response.data[0].clothing);
+        setTransport(response.data[0].transport);
+        setServices(response.data[0].services);
+        setMarkets(response.data[0].markets);
+        setRestaurants(response.data[0].restaurants);
+        setLeisure(response.data[0].leisure);
+        setOthers(response.data.others);
+        setIsEdit(true);
+        setIdEditing(props.match.params.id);
+  
+        return;
 
-      setSalary(response.data[0].incomes.salary);
-      setOtherIncome(response.data[0].incomes.otherIncome);
-      setMortgage(response.data[0].apartment.mortgage);
-      setRental(response.data[0].apartment.rental);
-      setChildcare(response.data[0].childcare);
-      setClothing(response.data[0].clothing);
-      setTransport(response.data[0].transport);
-      setServices(response.data[0].services);
-      setMarkets(response.data[0].markets);
-      setRestaurants(response.data[0].restaurants);
-      setLeisure(response.data[0].leisure);
-      setOthers(response.data.others);
-      setIsEdit(true);
-      setIdEditing(props.match.params.id);
+      } else {
+        setIsEdit(false);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -239,7 +249,14 @@ function InputExpenses(props) {
               />
               <hr className="my-4" />
             </div>
-            <button className="btn btn-success">Save Expenses</button>
+            <button className="btn btn-success">
+              {
+                !props.match.params.id ?
+                "Save expenses sheet"
+                :
+                "Edit expenses sheet"
+              }
+            </button>
           </form>
         </div>
       </div>

@@ -39,28 +39,46 @@ function Calculator() {
 
     function calculateExpenses() { // posible export
         // Expenses
-        const totalExpenses = 
-            expenses[0].apartment.mortgage ||
-            expenses[0].apartment.rental +
-            expenses[0].childcare +
-            expenses[0].clothing +
-            expenses[0].transport +
-            expenses[0].services +
-            expenses[0].markets +
-            expenses[0].restaurants +
-            expenses[0].leisure +
-            expenses[0].others;
-        
-        setgExpenses(totalExpenses);
+        try {
+            let mortgageRental;
+            if (expenses[0].apartment.mortgage) {
+                mortgageRental = expenses[0].apartment.mortgage;
+                return;
+            };
+            if (expenses[0].apartment.rental) {
+                mortgageRental = expenses[0].apartment.rental;
+                return;
+            };
+            const totalExpenses = 
+                mortgageRental +
+                expenses[0].childcare +
+                expenses[0].clothing +
+                expenses[0].transport +
+                expenses[0].services +
+                expenses[0].markets +
+                expenses[0].restaurants +
+                expenses[0].leisure +
+                expenses[0].others;
+            
+            setgExpenses(totalExpenses);
+            
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     function calculateIncomes() { // posible export
         // Incomes
-        const totalIncomes = 
-            expenses[0].incomes.salary +
-            expenses[0].incomes.otherIncome;
-        
-        setIncomes(totalIncomes);
+        try {
+            const totalIncomes = 
+                expenses[0].incomes.salary +
+                expenses[0].incomes.otherIncome;
+            
+            setIncomes(totalIncomes);
+            
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     function calculateGoalsCosts() { // posible export
