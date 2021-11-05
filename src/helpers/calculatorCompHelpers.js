@@ -1,6 +1,35 @@
 import { format } from 'timeago.js';
 
 
+export function calculateExpensesF(expenses) { // posible export
+    // Expenses
+    try {
+        let mortgageRental;
+        if (expenses[0].apartment.mortgage) {
+            mortgageRental = expenses[0].apartment.mortgage;
+        };
+        if (expenses[0].apartment.rental) {
+            mortgageRental = expenses[0].apartment.rental;
+        };
+        const totalExpenses =
+            Number(mortgageRental) +
+            Number(expenses[0].childcare) +
+            Number(expenses[0].clothing) +
+            Number(expenses[0].transport) +
+            Number(expenses[0].services) +
+            Number(expenses[0].markets) +
+            Number(expenses[0].restaurants) +
+            Number(expenses[0].leisure) +
+            Number(expenses[0].others);
+        
+        //setgExpenses(totalExpenses);
+        return totalExpenses;
+        
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export function calculateIncomesF(expenses) {
     // Incomes
     const totalIncomes = 

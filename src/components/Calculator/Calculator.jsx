@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { format } from 'timeago.js';
-import {  } from '../../helpers/calculatorCompHelpers';
+import { 
+    calculateIncomesF, 
+    calculateExpensesF, 
+    calculateGoalsCostsF, 
+    calculateGoalsCostsPerMonthF,
+    calculateCapitalNeededF,
+    calculateEstimatedYearsF,
+    calculateCostOfLivingPlaceF
+    } from '../../helpers/calculatorCompHelpers';
 
 function Calculator() {
 
@@ -30,159 +37,12 @@ function Calculator() {
             setExpenses(expenses.data);
             setGoals(goalsAxios.data);
 
-            calculateExpenses();
-            calculateIncomes();
-            calculateGoalsCosts();
-            calculateGoalsCostsPerMonth();
-            calculateCapitalNeeded();
+            setgExpenses(calculateExpensesF(expenses.data));
+            setIncomes(calculateIncomesF(expenses.data));
+            setgGoalsCost(calculateGoalsCostsF(goalsAxios.data));
+            setGoalsCostPerMont(calculateGoalsCostsPerMonthF(goalsAxios.data));
+            setCapitalNeeded(calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest));
     };
-
-    function calculateExpenses() { // posible export
-        // Expenses
-        try {
-            let mortgageRental;
-            if (expenses[0].apartment.mortgage) {
-                mortgageRental = expenses[0].apartment.mortgage;
-                return;
-            };
-            if (expenses[0].apartment.rental) {
-                mortgageRental = expenses[0].apartment.rental;
-                return;
-            };
-            const totalExpenses = 
-                mortgageRental +
-                expenses[0].childcare +
-                expenses[0].clothing +
-                expenses[0].transport +
-                expenses[0].services +
-                expenses[0].markets +
-                expenses[0].restaurants +
-                expenses[0].leisure +
-                expenses[0].others;
-            
-            setgExpenses(totalExpenses);
-            
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    function calculateIncomes() { // posible export
-        // Incomes
-        try {
-            const totalIncomes = 
-                expenses[0].incomes.salary +
-                expenses[0].incomes.otherIncome;
-            
-            setIncomes(totalIncomes);
-            
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    function calculateGoalsCosts() { // posible export
-        // Goals expenses
-        let goalsCosts = 0;
-        
-        if (!goals) {
-            setgGoalsCost(goalsCosts);
-        } else {
-            for (let i = 0; i < goals.length; i++) {
-                let cost = goals[i].cost;
-                goalsCosts = goalsCosts + cost;
-            }
-    
-            setgGoalsCost(goalsCosts);
-        };
-    };
-
-    function calculateGoalsCostsPerMonth() { // posible export
-        let costOfGoalsPerMonth = 0;
-        let countMonths = 0;
-
-        if (!goals) {
-            setGoalsCostPerMont(0);
-        } else {
-
-            for (let i = 0; i < goals.length; i++) {
-                let dateGoal = new Date(goals[i].deadline);
-
-                let months = format(dateGoal);
-
-                let divideMonths = months.split(' ');
-
-                let division;
-
-                if (divideMonths.includes('year') || divideMonths.includes('years')) {
-
-                    countMonths = Number(divideMonths[1]) * 12;
-                    division = (goals[i].cost / countMonths);
-
-                } else if (divideMonths.includes('month') || divideMonths.includes('months')) {
-
-                    countMonths = Number(divideMonths[1]);
-                    division = (goals[i].cost / countMonths);
-
-                } else if (divideMonths.includes('week') || divideMonths.includes('weeks')) {
-
-                    division = Number(goals[i].cost);
-
-                } else if (divideMonths.includes('day') || divideMonths.includes('days')) {
-
-                    division = Number(goals[i].cost);
-
-                } else if (divideMonths.includes('ago')) {
-
-                    division = 0;
-
-                } else {
-                    division = 0;
-                };
-                
-                costOfGoalsPerMonth = costOfGoalsPerMonth + division;
-
-            }
-
-            setGoalsCostPerMont(costOfGoalsPerMonth.toFixed());
-        };
-    };
-
-    function calculateCapitalNeeded() { // posible export
-        let totalExpensesPerMonth = Number(goalsCostPerMont) + Number(gExpenses);
-        let capitalNeeded = (totalExpensesPerMonth * 12) * (100 / desiredInterest);
-
-        if (capitalNeeded === Infinity || capitalNeeded === null){
-            setCapitalNeeded(0);
-        } else {     
-            setCapitalNeeded(capitalNeeded.toFixed());
-        };
-    };
-
-    function calculateEstimatedYears() { // posible export
-        let balance = Number(incomes) * 12 - Number(gExpenses) * 12;
-        let estimatedYears;
-
-        if (capitalNeededNewCLI === 0) {
-            estimatedYears = capitalNeeded / balance;
-        } else {
-            estimatedYears = capitalNeededNewCLI / balance;
-        };
-
-        if (estimatedYears === Infinity || estimatedYears === null){
-            setEstimatedYears(0);
-        } else {
-            setEstimatedYears(estimatedYears.toFixed());
-        };
-    };
-
-    function calculateCostOfLivingPlace() { // posible export
-        let differenceCLI = currentCLI / futureCLI;
-        let capitalNeededWithCLI = capitalNeeded / differenceCLI;
-
-        setCapitalNeededNewCLI(capitalNeededWithCLI.toFixed());
-    };
-
 
     const onChangeInteres = (e) => {
         setDesiredInterest(e.target.value);
@@ -191,8 +51,8 @@ function Calculator() {
     const onSubmitFormOne =  async (e) => {
         e.preventDefault();
 
-        calculateCapitalNeeded();
-        calculateEstimatedYears();
+        setCapitalNeeded(calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest));
+        setEstimatedYears(calculateEstimatedYearsF(incomes, gExpenses, capitalNeededNewCLI, capitalNeeded));
     };
 
     const onChangeCLI = (e) => {
@@ -203,8 +63,8 @@ function Calculator() {
     const onSubmitFormTwo = async (e) => {
         e.preventDefault();
 
-        calculateCostOfLivingPlace();
-        calculateEstimatedYears();
+        setCapitalNeededNewCLI(calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded));
+        setEstimatedYears(calculateEstimatedYearsF(incomes, gExpenses, capitalNeededNewCLI, capitalNeeded));
     };
 
     if (!expenses || !goals) {
