@@ -1,87 +1,90 @@
-import React from "react";
-
-import "bootswatch/dist/flatly/bootstrap.min.css";
+import React, {useState} from "react";
+import { Link } from "react-router-dom";
+import { deleteToken } from '../../helpers/authHelpers';
 
 function NavMenu() {
+
+  const [isLogged, setIsLogged] = useState(false);
+
+  const deleteSession = () => {
+    deleteToken();
+
+    setIsLogged(true);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
+        <Link className="navbar-brand" to="/">
+          FINANCIAL
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarColor01"
-          aria-controls="navbarColor01"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            <Link className="nav-link" to="/">
+              Home
+            </Link>
+            <Link className="nav-link" to="/create">
+              Creata A Goal
+            </Link>
+            <Link className="nav-link" to="/expenses">
+              My Expenses
+            </Link>
+            <Link className="nav-link" to="/calculator">
+              Calculate
+            </Link>
+          </div>
+        </div>
 
-        <div className="collapse navbar-collapse" id="navbarColor01">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                Home
-                <span className="visually-hidden">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Features
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                About
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
-                  Separated link
+        <div className="float-right">
+          {
+            isLogged ? (
+              <div className="navbar-nav float-right">
+                <Link className="nav-link" to="/log">
+                  Login
+                </Link>
+                <Link className="nav-link" to="/reg">
+                  Register
+                </Link>
+              </div>
+            ) : (
+              <div className="navbar-nav float-right">
+                <a className="nav-link" onClick={deleteSession}>
+                  Logout
                 </a>
               </div>
-            </li>
-          </ul>
-          <form className="d-flex">
-            <input
-              className="form-control me-sm-2"
-              type="text"
-              placeholder="Search"
-            />
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
+            )
+          }
+        </div>
+
+        <div className="btn-group dropleft">
+          <button
+            type="button"
+            className="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            User
+          </button>
+          <div className="dropdown-menu">
+            <Link className="dropdown-item" to="/users">
+              View Users
+            </Link>
+            <Link className="dropdown-item" to="/profile">
+              User Profile
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
