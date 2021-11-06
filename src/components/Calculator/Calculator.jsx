@@ -10,6 +10,9 @@ import {
   calculateCostOfLivingPlaceF,
 } from "../../helpers/calculatorCompHelpers";
 
+import Loader from "../Loader/Loader";
+
+
 function Calculator() {
 
   useEffect(() => {
@@ -30,6 +33,7 @@ function Calculator() {
   const [futureCLI, setFutureCLI] = useState(0);
   const [capitalNeededNewCLI, setCapitalNeededNewCLI] = useState(0);
 	const [errorGet, setErrorGet] = useState(false);
+	const [loader, setLoader] = useState(true);
 
 
   async function getData() {
@@ -61,9 +65,10 @@ function Calculator() {
 			setCapitalNeeded(
 				calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
 			);
+			setLoader(false);
 			
 		} catch (error) {
-			
+			setErrorGet(true);
 		}
   };
 
@@ -113,16 +118,23 @@ function Calculator() {
   };
 
 
-  if (!expenses || !goals) {
+	if (loader === true) {
+		return (
+			<Loader />
+		);
+	} else if (errorGet || !expenses || !goals) {
     return (
+
       <div className="col-md-8 offset-md-2">
         <div className="card-body bg-light">
           <h3 className="card-title">You haven't entered any expenses yet</h3>
         </div>
       </div>
+
     );
   } else {
     return (
+
       <div className="col-md-10 offset-md-1">
         <div className="card-body bg-light">
           {/* SHOW SOME NUMBERS */}
@@ -247,6 +259,7 @@ function Calculator() {
           </div>
         </div>
       </div>
+
     );
   }
 }
