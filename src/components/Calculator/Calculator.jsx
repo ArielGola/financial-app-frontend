@@ -16,7 +16,45 @@ import Loader from "../Loader/Loader";
 function Calculator() {
 
   useEffect(() => {
+		
+		async function getData() {
+			try {
+				
+				const expenses = await Axios.get(
+					"http://localhost:4000/api/financial/expenses"
+				);
+		
+				const goalsAxios = await Axios.get(
+					"http://localhost:4000/api/financial/goals"
+				);
+		
+				setExpenses(expenses.data);
+				setGoals(goalsAxios.data);
+		
+				setgExpenses(
+					calculateExpensesF(expenses.data)
+				);
+				setIncomes(
+					calculateIncomesF(expenses.data)
+				);
+				setgGoalsCost(
+					calculateGoalsCostsF(goalsAxios.data)
+				);
+				setGoalsCostPerMont(
+					calculateGoalsCostsPerMonthF(goalsAxios.data)
+				);
+				setCapitalNeeded(
+					calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
+				);
+				setLoader(false);
+				
+			} catch (error) {
+				setErrorGet(true);
+			}
+		};
+
     getData();
+
   }, []);
 
 	
@@ -36,62 +74,31 @@ function Calculator() {
 	const [loader, setLoader] = useState(true);
 
 
-  async function getData() {
-		try {
-			
-			const expenses = await Axios.get(
-				"http://localhost:4000/api/financial/expenses"
-			);
-	
-			const goalsAxios = await Axios.get(
-				"http://localhost:4000/api/financial/goals"
-			);
-	
-			setExpenses(expenses.data);
-			setGoals(goalsAxios.data);
-	
-			setgExpenses(
-				calculateExpensesF(expenses.data)
-			);
-			setIncomes(
-				calculateIncomesF(expenses.data)
-			);
-			setgGoalsCost(
-				calculateGoalsCostsF(goalsAxios.data)
-			);
-			setGoalsCostPerMont(
-				calculateGoalsCostsPerMonthF(goalsAxios.data)
-			);
-			setCapitalNeeded(
-				calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
-			);
-			setLoader(false);
-			
-		} catch (error) {
-			setErrorGet(true);
-		}
-  };
-
-
   const onChangeInteres = (e) => {
     setDesiredInterest(e.target.value);
   };
 
 
   const onSubmitFormOne = async (e) => {
-    e.preventDefault();
+		try {
+			
+			e.preventDefault();
 
-    setCapitalNeeded(
-      calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
-    );
-    setEstimatedYears(
-      calculateEstimatedYearsF(
-        incomes,
-        gExpenses,
-        capitalNeededNewCLI,
-        capitalNeeded
-      )
-    );
+			setCapitalNeeded(
+				calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
+			);
+			setEstimatedYears(
+				calculateEstimatedYearsF(
+					incomes,
+					gExpenses,
+					capitalNeededNewCLI,
+					capitalNeeded
+				)
+			);
+			
+		} catch (error) {
+			setErrorGet(true);
+		}
   };
 
 
@@ -102,19 +109,25 @@ function Calculator() {
 
 
   const onSubmitFormTwo = async (e) => {
-    e.preventDefault();
-
-    setCapitalNeededNewCLI(
-      calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded)
-    );
-    setEstimatedYears(
-      calculateEstimatedYearsF(
-        incomes,
-        gExpenses,
-        capitalNeededNewCLI,
-        capitalNeeded
-      )
-    );
+		try {
+		
+			e.preventDefault();
+	
+			setCapitalNeededNewCLI(
+				calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded)
+			);
+			setEstimatedYears(
+				calculateEstimatedYearsF(
+					incomes,
+					gExpenses,
+					capitalNeededNewCLI,
+					capitalNeeded
+				)
+			);
+			
+		} catch (error) {
+			setErrorGet(true);
+		}
   };
 
 

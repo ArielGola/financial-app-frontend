@@ -2,24 +2,37 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
+import Loader from "../Loader/Loader";
+
 function ShowExpenses() {
   useEffect(() => {
     async function getExpenses() {
-      const response = await Axios.get(
-        "http://localhost:4000/api/financial/expenses"
-      );
-      setExpenses(response.data);
-      getBalance(response.data);
-    }
+      try {
+        
+        const response = await Axios.get(
+          "http://localhost:4000/api/financial/expenses"
+        );
+
+        setLoader(false);
+        setExpenses(response.data);
+        getBalance(response.data);
+        
+      } catch (error) {
+        setLoader(true);
+      }
+    };
 
     getExpenses();
   }, []);
 
   const [expenses, setExpenses] = useState([]);
   const [balance, setBalance] = useState(0);
+  const [loader, setLoader] = useState(true);
+  const [errorGet, setErrorGet] = useState(false);
 
   function getBalance(expenses) {
     try {
+
       let mortgageRental;
       if (expenses[0].apartment.mortgage) {
         mortgageRental = expenses[0].apartment.mortgage;
@@ -47,12 +60,20 @@ function ShowExpenses() {
       setBalance(balanceCount);
 
     } catch (error) {
-      console.log(error);
+      setErrorGet(true);
     }
   }
 
-  if (!expenses || expenses.length <= 0) {
+
+  if (loader === true) {
     return (
+
+      <Loader />
+
+    );
+  } else if (!expenses || expenses.length <= 0 || errorGet) {
+    return (
+
       <div className="col-md-8 offset-md-2">
         <div className="card-body bg-light">
           <h3 className="card-title">You haven't entered any expenses yet</h3>
@@ -61,9 +82,11 @@ function ShowExpenses() {
           </Link>
         </div>
       </div>
+
     );
   } else {
     return (
+
       <div className="col-md-8 offset-md-2">
         {expenses.map((exp) => (
           <div className="card-body bg-light" key={exp._id}>
@@ -115,6 +138,7 @@ function ShowExpenses() {
           </div>
         ))}
       </div>
+
     );
   }
 }

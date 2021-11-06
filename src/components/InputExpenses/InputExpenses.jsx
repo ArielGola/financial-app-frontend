@@ -1,10 +1,50 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+
+import Loader from "../Loader/Loader";
 
 function InputExpenses(props) {
+
   useEffect(() => {
+
+    async function getData() {
+      try {
+
+        if (props.match.params.id) {
+          
+          const response = await Axios.get(
+            "http://localhost:4000/api/financial/expenses"
+          );
+    
+          setSalary(response.data[0].incomes.salary);
+          setOtherIncome(response.data[0].incomes.otherIncome);
+          setMortgage(response.data[0].apartment.mortgage);
+          setRental(response.data[0].apartment.rental);
+          setChildcare(response.data[0].childcare);
+          setClothing(response.data[0].clothing);
+          setTransport(response.data[0].transport);
+          setServices(response.data[0].services);
+          setMarkets(response.data[0].markets);
+          setRestaurants(response.data[0].restaurants);
+          setLeisure(response.data[0].leisure);
+          setOthers(response.data.others);
+          setIsEdit(true);
+          setIdEditing(props.match.params.id);
+  
+        } else {
+          setIsEdit(false);
+        };
+
+        setLoader(false);
+
+      } catch (error) {
+        setErrorGet(true);
+      }
+    };
+
     getData();
+
   }, []);
 
   let history = useHistory();
@@ -24,75 +64,51 @@ function InputExpenses(props) {
   const [idEditing, setIdEditing] = useState("");
   const [isEdit, setIsEdit] = useState(true);
 
-  async function getData() {
-    try {
-      if (props.match.params.id) {
-        
-        const response = await Axios.get(
-          "http://localhost:4000/api/financial/expenses"
-        );
+  const [errorGet, setErrorGet] = useState(false);
+  const [loader, setLoader] = useState(true);
   
-        setSalary(response.data[0].incomes.salary);
-        setOtherIncome(response.data[0].incomes.otherIncome);
-        setMortgage(response.data[0].apartment.mortgage);
-        setRental(response.data[0].apartment.rental);
-        setChildcare(response.data[0].childcare);
-        setClothing(response.data[0].clothing);
-        setTransport(response.data[0].transport);
-        setServices(response.data[0].services);
-        setMarkets(response.data[0].markets);
-        setRestaurants(response.data[0].restaurants);
-        setLeisure(response.data[0].leisure);
-        setOthers(response.data.others);
-        setIsEdit(true);
-        setIdEditing(props.match.params.id);
-  
-        return;
-
-      } else {
-        setIsEdit(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      
+      e.preventDefault();
 
-    const newExpenses = {
-      incomes: {
-        salary: salary,
-        otherIncome: otherIncome,
-      },
-      apartment: {
-        mortgage: mortgage,
-        rental: rental,
-      },
-      childcare: childcare,
-      clothing: clothing,
-      transport: transport,
-      services: services,
-      markets: markets,
-      restaurants: restaurants,
-      leisure: leisure,
-      others: others,
-    };
+      const newExpenses = {
+        incomes: {
+          salary: salary,
+          otherIncome: otherIncome,
+        },
+        apartment: {
+          mortgage: mortgage,
+          rental: rental,
+        },
+        childcare: childcare,
+        clothing: clothing,
+        transport: transport,
+        services: services,
+        markets: markets,
+        restaurants: restaurants,
+        leisure: leisure,
+        others: others,
+      };
 
-    if (isEdit) {
-      await Axios.put(
-        "http://localhost:4000/api/financial/expenses/" + idEditing,
-        newExpenses
-      );
-    } else {
-      await Axios.post(
-        "http://localhost:4000/api/financial/expenses",
-        newExpenses
-      );
+      if (isEdit) {
+        await Axios.put(
+          "http://localhost:4000/api/financial/expenses/" + idEditing,
+          newExpenses
+        );
+      } else {
+        await Axios.post(
+          "http://localhost:4000/api/financial/expenses",
+          newExpenses
+        );
+      }
+
+      history.push("/expenses");
+
+    } catch (error) {
+      setErrorGet(true);
     }
-
-    //window.location.href = "/expenses";
-    history.push("/expenses");
   };
 
   const onChangeInput = (e) => {
@@ -110,6 +126,27 @@ function InputExpenses(props) {
     if (e.target.name === "others") setOthers(e.target.value);
   };
 
+
+  if (loader === true) {
+    return (
+
+      <Loader />
+
+    );
+  } else if (errorGet) {
+    return (
+
+      <div className="col-md-8 offset-md-2">
+        <div className="card-body bg-light">
+          <h3 className="card-title">There was an error with petition of data</h3>
+          <Link className="btn btn-success btn-block" to="expenses/create">
+            Click here to go to home page
+          </Link>
+        </div>
+      </div>
+
+    );
+  }
   return (
     <div className="col-md-8 offset-md-2">
       <div className="card-body bg-light">
