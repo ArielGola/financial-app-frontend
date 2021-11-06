@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 
 function InputExpenses(props) {
 
-  useEffect(() => {
+  useEffect((props) => {
 
     async function getData() {
       try {
@@ -146,159 +146,162 @@ function InputExpenses(props) {
       </div>
 
     );
-  }
-  return (
-    <div className="col-md-8 offset-md-2">
-      <div className="card-body bg-light">
-        <div className="card-header">
-          <h3 className="card-title">Balance of Expenses</h3>
-        </div>
-        <div className="card-body">
-          <form onSubmit={onSubmit}>
-            <div className="jumbotron-fluid">
-              <label className="lead">Salary:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Salary $"
-                name="salary"
-                value={salary}
-                onChange={onChangeInput}
-              />
+  } else {
+    return (
 
-              <label className="lead">Other incomes:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Other Income $"
-                name="otherIncome"
-                value={otherIncome}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+      <div className="col-md-8 offset-md-2">
+        <div className="card-body bg-light">
+          <div className="card-header">
+            <h3 className="card-title">Balance of Expenses</h3>
+          </div>
+          <div className="card-body">
+            <form onSubmit={onSubmit}>
+              <div className="jumbotron-fluid">
+                <label className="lead">Salary:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Salary $"
+                  name="salary"
+                  value={salary}
+                  onChange={onChangeInput}
+                />
 
-              <label className="lead">Mortgage:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Mortgage $"
-                name="mortgage"
-                value={mortgage}
-                onChange={onChangeInput}
-              />
+                <label className="lead">Other incomes:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Other Income $"
+                  name="otherIncome"
+                  value={otherIncome}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Rental:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Rental $"
-                name="rental"
-                value={rental}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Mortgage:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Mortgage $"
+                  name="mortgage"
+                  value={mortgage}
+                  onChange={onChangeInput}
+                />
 
-              <label className="lead">Childcare:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Childcare $"
-                name="childcare"
-                value={childcare}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Rental:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Rental $"
+                  name="rental"
+                  value={rental}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Clothing:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Clothing $"
-                name="clothing"
-                value={clothing}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Childcare:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Childcare $"
+                  name="childcare"
+                  value={childcare}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Transport:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Transport $"
-                name="transport"
-                value={transport}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Clothing:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Clothing $"
+                  name="clothing"
+                  value={clothing}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Services:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Services $"
-                name="services"
-                value={services}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Transport:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Transport $"
+                  name="transport"
+                  value={transport}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Markets:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Markets $"
-                name="markets"
-                value={markets}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Services:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Services $"
+                  name="services"
+                  value={services}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Restaurants:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Restaurants $"
-                name="restaurants"
-                value={restaurants}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Markets:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Markets $"
+                  name="markets"
+                  value={markets}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Leisure:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Leisure $"
-                name="leisure"
-                value={leisure}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
+                <label className="lead">Restaurants:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Restaurants $"
+                  name="restaurants"
+                  value={restaurants}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
 
-              <label className="lead">Others expenses:</label>
-              <input
-                type="number"
-                className="form-control m-2"
-                placeholder="Others expenses $"
-                name="others"
-                value={others}
-                onChange={onChangeInput}
-              />
-              <hr className="my-4" />
-            </div>
-            <button className="btn btn-success">
-              {
-                !props.match.params.id ?
-                "Save expenses sheet"
-                :
-                "Edit expenses sheet"
-              }
-            </button>
-          </form>
+                <label className="lead">Leisure:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Leisure $"
+                  name="leisure"
+                  value={leisure}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
+
+                <label className="lead">Others expenses:</label>
+                <input
+                  type="number"
+                  className="form-control m-2"
+                  placeholder="Others expenses $"
+                  name="others"
+                  value={others}
+                  onChange={onChangeInput}
+                />
+                <hr className="my-4" />
+              </div>
+              <button className="btn btn-success">
+                {
+                  !props.match.params.id ?
+                  "Save expenses sheet"
+                  :
+                  "Edit expenses sheet"
+                }
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+      
+    );
+  }
 }
 
 export default InputExpenses;

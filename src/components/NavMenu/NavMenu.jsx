@@ -15,7 +15,7 @@ function NavMenu() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/#">
           FINANCIAL
         </Link>
         <button
@@ -31,7 +31,7 @@ function NavMenu() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/#">
               Home
             </Link>
             <Link className="nav-link" to="/create">
@@ -58,10 +58,10 @@ function NavMenu() {
                 </Link>
               </div>
             ) : (
-              <div className="navbar-nav float-right">
-                <a className="nav-link" onClick={deleteSession}>
+              <div className="float-right">
+                <button className="btn btn-info" onClick={deleteSession}>
                   Logout
-                </a>
+                </button>
               </div>
             )
           }

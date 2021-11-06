@@ -4,9 +4,9 @@ import { useHistory, Link } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
 
-function CreateGoal(props) {
+function CreateGoal() {
   
-  useEffect(() => {
+  useEffect((props) => {
 
     async function getData() {
       try {

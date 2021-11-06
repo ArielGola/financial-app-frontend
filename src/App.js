@@ -16,8 +16,6 @@ import Register from './components/Register/Register';
 
 initInterceptor();
 
-let existToken;
-
 function App() {
 
   useEffect(() => {
@@ -28,12 +26,6 @@ function App() {
     }
 
     initInterceptor();
-
-    if (!getToken()) {
-      existToken = false;
-    } else {
-      existToken = true;
-    }
   }, []);
 
   return (
