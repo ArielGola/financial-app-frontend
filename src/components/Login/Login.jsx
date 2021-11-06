@@ -30,15 +30,9 @@ function Login() {
       password: password,
     };
 
-    const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser)/*.then(
-      (res) => {
-        localStorage.setItem("token", res.data.token);
-      },
-      (err) => console.log("No sirvio el suscreibe")
-    );*/
-    localStorage.setItem('token', response.data.token);
+    const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser);
+    localStorage.setItem("token", response.data.token);
 
-    //window.location.href = "/";
     history.push("/");
   };
 
