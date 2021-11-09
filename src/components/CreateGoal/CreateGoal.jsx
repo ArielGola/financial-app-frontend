@@ -26,10 +26,10 @@ function CreateGoal() {
           setIdEditing(props.match.params.id);
         };
 
-        setLoader(false);
-        
       } catch (error) {
         setErrorGet(true);
+      } finally {
+        setLoader(false);
       }
     };
 
@@ -61,7 +61,7 @@ function CreateGoal() {
         description: description,
         cost: cost,
         deadline: deadline,
-        currentDate: currentDate,
+        currentDate: currentDate
       };
 
       if (isEdit) {

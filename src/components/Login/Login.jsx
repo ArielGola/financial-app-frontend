@@ -93,7 +93,7 @@ function Login() {
             <hr className="my-2" />
             <div className="form-group">
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 placeholder="Password..."
                 name="password"

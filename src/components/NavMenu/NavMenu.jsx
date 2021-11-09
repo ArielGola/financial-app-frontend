@@ -7,9 +7,15 @@ function NavMenu() {
   const [isLogged, setIsLogged] = useState(false);
 
   const deleteSession = () => {
-    deleteToken();
+    try {
+      
+      deleteToken();
 
-    setIsLogged(true);
+      setIsLogged(true);
+      
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
