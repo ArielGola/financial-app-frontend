@@ -4,9 +4,9 @@ import { useHistory, Link } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
 
-function CreateGoal() {
+function CreateGoal(props) {
   
-  useEffect((props) => {
+  useEffect(() => {
 
     async function getData() {
       try {
@@ -117,8 +117,10 @@ function CreateGoal() {
       <div className="col-md-6 offset-md-3">
         <div className="card-body bg-light">
           <h3>{isEdit ? "Edit Goal" : "Create Goal"}</h3>
+          <hr className="my-2" />
           <form onSubmit={onSubmit}>
             <div className="form-group">
+              <label className="lead">Goal title</label>
               <input
                 type="text"
                 className="form-control"
@@ -129,7 +131,9 @@ function CreateGoal() {
                 onChange={onChangeInput}
               />
             </div>
+            <hr className="my-2" />
             <div className="form-group">
+              <label className="lead">Goal description</label>
               <input
                 type="text"
                 className="form-control"
@@ -140,7 +144,9 @@ function CreateGoal() {
                 onChange={onChangeInput}
               />
             </div>
+            <hr className="my-2" />
             <div className="form-group">
+              <label className="lead">Goal cost</label>
               <input
                 type="number"
                 className="form-control"
@@ -151,7 +157,9 @@ function CreateGoal() {
                 onChange={onChangeInput}
               />
             </div>
+            <hr className="my-2" />
             <div className="form-group">
+              <label className="lead">Current date</label>
               {/* Hay Que intentar usar un plugin de calendario */}
               <input
                 type="date"
@@ -162,7 +170,9 @@ function CreateGoal() {
                 onChange={onChangeInput}
               />
             </div>
+            <hr className="my-2" />
             <div className="form-group">
+              <label className="lead">Goal deadline</label>
               {/* Hay Que intentar usar un plugin de calendario */}
               <input
                 type="date"
@@ -173,6 +183,7 @@ function CreateGoal() {
                 onChange={onChangeInput}
               />
             </div>
+            <hr className="my-2" />
             <button className="btn btn-primary">
               {isEdit ? "Update" : "Create"}
             </button>

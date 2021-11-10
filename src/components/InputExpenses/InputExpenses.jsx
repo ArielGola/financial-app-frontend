@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 
 function InputExpenses(props) {
 
-  useEffect((props) => {
+  useEffect(() => {
 
     async function getData() {
       try {
@@ -276,7 +276,7 @@ function InputExpenses(props) {
                 />
                 <hr className="my-4" />
 
-                <label className="lead">Others expenses:</label>
+                <label className="lead">Others expenses (Credit card):</label>
                 <input
                   type="number"
                   className="form-control m-2"

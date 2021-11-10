@@ -36,11 +36,17 @@ function Login() {
         password: password,
       };
 
-      const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser);
-      localStorage.setItem("token", response.data.token);
+      try {
 
-      history.push("/");
-      
+        const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser);
+        localStorage.setItem("token", response.data.token);
+        
+      } catch (error) {
+        setErrorGet(true);
+      } finally {
+        history.push("/");
+      }
+
     } catch (error) {
       setErrorGet(true);
     }

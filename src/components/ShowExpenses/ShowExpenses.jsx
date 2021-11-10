@@ -117,7 +117,7 @@ function ShowExpenses() {
                 <hr className="my-4" />
                 <p className="lead">Leisure: ${exp.leisure}</p>
                 <hr className="my-4" />
-                <p className="lead">Others expenses: ${exp.others}</p>
+                <p className="lead">Others expenses (Credit card): ${exp.others}</p>
                 <hr className="my-4" />
                 <p className="lead"><i>Balance: ${balance}</i></p>
                 <hr className="my-4" />
