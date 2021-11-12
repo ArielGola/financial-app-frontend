@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 
+import DatePickerR from 'react-datepicker';
+
 import Loader from "../Loader/Loader";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function CreateGoal(props) {
   
@@ -159,29 +163,26 @@ function CreateGoal(props) {
             </div>
             <hr className="my-2" />
             <div className="form-group">
-              <label className="lead">Current date</label>
-              {/* Hay Que intentar usar un plugin de calendario */}
-              <input
-                type="date"
-                className="form-control"
-                name="currentDate"
-                required
-                value={currentDate}
-                onChange={onChangeInput}
-              />
+              <label className="lead">Goal initiation date</label>
+                <DatePickerR 
+                  className="form-control"
+                  onChange={(date) => setCurrentDate(date)}
+                  selected={currentDate}
+                  dateFormat="dd/MM/yyyy"
+                  required
+                />
             </div>
             <hr className="my-2" />
             <div className="form-group">
               <label className="lead">Goal deadline</label>
-              {/* Hay Que intentar usar un plugin de calendario */}
-              <input
-                type="date"
-                className="form-control"
-                name="deadline"
-                required
-                value={deadline}
-                onChange={onChangeInput}
-              />
+                <DatePickerR 
+                  className="form-control"
+                  onChange={(date) => setDeadline(date)}
+                  selected={deadline}
+                  dateFormat="dd/MM/yyyy"
+                  minDate={Date.now()}
+                  required
+                />
             </div>
             <hr className="my-2" />
             <button className="btn btn-primary">
