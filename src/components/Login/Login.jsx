@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 
-function Login() {
+function Login(props) {
 
   let history = useHistory();
 
@@ -10,6 +10,12 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorGet, setErrorGet] = useState(false);
+
+
+  const handleLoggedLogin = (value) => {
+    const changeLogged = props.handleLogged;
+    changeLogged(value);
+  };
 
 
   const onChangeInput = (e) => {
@@ -40,6 +46,8 @@ function Login() {
 
         const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser);
         localStorage.setItem("token", response.data.token);
+        
+        handleLoggedLogin(true);
         
       } catch (error) {
         setErrorGet(true);

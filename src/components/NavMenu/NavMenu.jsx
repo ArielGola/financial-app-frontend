@@ -1,17 +1,25 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import { deleteToken } from '../../helpers/authHelpers';
 
-function NavMenu() {
+function NavMenu(props) {
 
-  const [isLogged, setIsLogged] = useState(false);
+  let history = useHistory();
+
+  const handleLoggedNavMenu = (value) => {
+    const changeLogged = props.handleLogged;
+    changeLogged(value);
+  };
 
   const deleteSession = () => {
     try {
       
       deleteToken();
 
-      setIsLogged(true);
+      handleLoggedNavMenu(false);
+
+      //history.push();
+      window.location.reload();
       
     } catch (error) {
       console.log(error.message);
@@ -54,7 +62,8 @@ function NavMenu() {
 
         <div className="float-right">
           {
-            isLogged ? (
+            //!isLogged ? (
+            !props.logged ? (
               <div className="navbar-nav float-right">
                 <Link className="nav-link" to="/log">
                   Login

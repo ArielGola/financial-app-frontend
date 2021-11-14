@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 
-function Register() {
+function Register(props) {
 
   let history = useHistory();
 
@@ -13,6 +13,12 @@ function Register() {
   const [password, setPassword] = useState("");
 
   const [errorGet, setErrorGet] = useState(false);
+
+
+  const handleLoggedRegister = (value) => {
+    const changeLogged = props.handleLogged;
+    changeLogged(value);
+  };
 
 
   const onChangeInput = (e) => {
@@ -49,6 +55,8 @@ function Register() {
 
       const response = await Axios.post("http://localhost:4000/api/users/usr/", newUser)
       localStorage.setItem('token', response.data.token);
+
+      handleLoggedRegister(true);
 
       history.push("/");
 
