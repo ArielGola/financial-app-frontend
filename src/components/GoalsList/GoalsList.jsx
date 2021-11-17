@@ -5,19 +5,15 @@ import { format } from "timeago.js";
 
 import Loader from "../Loader/Loader";
 
-function GoalsList(props) {
+function GoalsList() {
+
   useEffect(() => {
-    if (!logged) {
-      setGoals(null);
-    }
-    
     getGoals();
   }, []);
 
   const [goals, setGoals] = useState([]);
   const [loader, setLoader] = useState(true);
   const [errorGet, setErrorGet] = useState(false);
-  const [logged, setLogged] = useState(props.logged);
 
   const getGoals = useCallback(async () => {
     try {

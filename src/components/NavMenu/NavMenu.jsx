@@ -18,8 +18,7 @@ function NavMenu(props) {
 
       handleLoggedNavMenu(false);
 
-      //history.push();
-      window.location.reload();
+      history.push("/expenses");
       
     } catch (error) {
       console.log(error.message);

@@ -42,23 +42,11 @@ function App() {
       <NavMenu logged={logged} handleLogged={handleLogged} />
 
       <div className="contaier p-4">
-        {/*
-        <Route path="/" exact component={GoalsList} />
-        <Route path="/edit/:id" component={CreateGoal} />
-        <Route path="/create" component={CreateGoal} />
-        <Route path="/expenses" exact component={ShowExpenses} />
-        <Route path="/expenses/edit/:id" component={InputExpenses} />
-        <Route path="/expenses/create" component={InputExpenses} />
-        <Route path="/calculator" component={Calculator} />
-        <Route path="/log" component={Login} />
-        <Route path="/reg" component={Register} />
-        */}
+        
         <Route path="/" exact >
-          <GoalsList logged={logged} />
+          <GoalsList logged={logged} handleLogged={handleLogged} />
         </Route>
-        <Route path="/edit/:id">
-          <CreateGoal />
-        </Route>
+        <Route path="/edit/:id" render={(props) => <CreateGoal {...props} />}/>
         <Route path="/create">
           <CreateGoal />
         </Route>

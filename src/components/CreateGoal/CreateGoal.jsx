@@ -15,7 +15,7 @@ function CreateGoal(props) {
     async function getData() {
       try {
         
-        if (props.match.params.id) {
+        if (window.location.pathname.includes('edit')) {
           const response = await Axios.get(
             "http://localhost:4000/api/financial/goals/" + props.match.params.id
           );
@@ -30,11 +30,11 @@ function CreateGoal(props) {
           setIdEditing(props.match.params.id);
         };
 
+        setLoader(false);
+
       } catch (error) {
         setErrorGet(true);
-      } finally {
-        setLoader(false);
-      }
+      };
     };
 
     getData();
@@ -108,7 +108,7 @@ function CreateGoal(props) {
       <div className="col-md-8 offset-md-2">
         <div className="card-body bg-light">
           <h3 className="card-title">There was an error with creating of goal</h3>
-          <Link className="btn btn-success btn-block" to="expenses/create">
+          <Link className="btn btn-success btn-block" to="/">
             Click here to go to home page
           </Link>
         </div>
@@ -150,7 +150,7 @@ function CreateGoal(props) {
             </div>
             <hr className="my-2" />
             <div className="form-group">
-              <label className="lead">Goal cost</label>
+              <label className="lead">Goal cost $</label>
               <input
                 type="number"
                 className="form-control"
