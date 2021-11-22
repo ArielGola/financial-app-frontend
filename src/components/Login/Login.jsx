@@ -44,8 +44,13 @@ function Login(props) {
 
       try {
 
+        let now = new Date();
+        let time = now.getTime();
+        let expireTime = time + 60*60*12;
+        now.setTime(expireTime);
+
         const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser);
-        localStorage.setItem("token", response.data.token);
+        document.cookie = `token=${response.data.token}; expires=${now.toUTCString}`;
         
         handleLoggedLogin(true);
         

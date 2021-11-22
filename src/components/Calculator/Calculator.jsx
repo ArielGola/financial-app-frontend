@@ -79,22 +79,28 @@ function Calculator() {
   };
 
 
-  const onSubmitFormOne = async (e) => {
+  const onSubmitFormOne = (e) => {
+
 		try {
-			
-			e.preventDefault();
+ 
+      e.preventDefault();
+
+      setEstimatedYears(0);
+
+      let calculateCapitalNeeded = calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest);
 
 			setCapitalNeeded(
-				calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
+				calculateCapitalNeeded
 			);
-			setEstimatedYears(
-				calculateEstimatedYearsF(
-					incomes,
-					gExpenses,
-					capitalNeededNewCLI,
-					capitalNeeded
-				)
-			);
+      
+      let calculateEstimatedYears = calculateEstimatedYearsF(
+        incomes,
+        gExpenses,
+        capitalNeededNewCLI,
+        calculateCapitalNeeded
+      );
+
+      setEstimatedYears(calculateEstimatedYears);
 			
 		} catch (error) {
 			setErrorGet(true);
@@ -108,26 +114,41 @@ function Calculator() {
   };
 
 
-  const onSubmitFormTwo = async (e) => {
+  const onSubmitFormTwo = (e) => {
 		try {
 		
 			e.preventDefault();
+
+      setEstimatedYears(0);
 	
-			setCapitalNeededNewCLI(
-				calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded)
-			);
-			setEstimatedYears(
-				calculateEstimatedYearsF(
-					incomes,
-					gExpenses,
-					capitalNeededNewCLI,
-					capitalNeeded
-				)
-			);
+      let calculateCostOfLivingPlace = calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded);
+
+			setCapitalNeededNewCLI(calculateCostOfLivingPlace);
+      
+      let calculateEstimatedYears = calculateEstimatedYearsF(
+        incomes,
+        gExpenses,
+        calculateCostOfLivingPlace,
+        capitalNeeded
+      );
+
+			setEstimatedYears(calculateEstimatedYears);
 			
 		} catch (error) {
 			setErrorGet(true);
 		}
+  };
+
+
+  const clearValues = () => {
+
+    setDesiredInterest(0);
+    setCapitalNeeded(0);
+    setEstimatedYears(0);
+    setCurrentCLI(0);
+    setFutureCLI(0);
+    setCapitalNeededNewCLI(0);
+
   };
 
 
@@ -195,7 +216,7 @@ function Calculator() {
               <button className="btn btn-primary mt-2">Done</button>
             </form>
             <p className="h5 mt-4">
-              Capital invested needed: ${capitalNeeded} (Interest in{" "}
+              Capital invested needed: ${Number(capitalNeeded)} (Interest in{" "}
               {desiredInterest}%)
             </p>
             <p className="lead">
@@ -232,24 +253,28 @@ function Calculator() {
               <form onSubmit={onSubmitFormTwo}>
                 <div className="form-group">
                   <p className="lead">CLI of you current city or country:</p>
+                  <p className="m-2">Example: Belo Horizonte = 52</p>
                   <input
                     type="number"
                     name="currentCLI"
-                    className="form-control"
+                    className="form-control mb-4"
                     placeholder="Ex: Belo Horizonte = 52"
                     onChange={onChangeCLI}
+                    defaultValue={currentCLI}
                   />
                 </div>
                 <div className="form-group">
                   <p className="lead">
                     CLI of the city or country where you want to live:
                   </p>
+                  <p className="m-2">Example: Toronto = 86</p>
                   <input
                     type="number"
                     name="futureCLI"
-                    className="form-control"
+                    className="form-control mb-2"
                     placeholder="Ex: Toronto = 86"
                     onChange={onChangeCLI}
+                    defaultValue={futureCLI}
                   />
                 </div>
                 <button className="btn btn-primary">Calculate</button>
@@ -261,6 +286,9 @@ function Calculator() {
               <p className="h5">
                 Now you need save money for {estimatedYears} years
               </p>
+              <button className="btn btn-primary" onClick={clearValues}>
+                Clear values
+              </button>
             </div>
           </div>
 

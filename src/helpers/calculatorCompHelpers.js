@@ -60,7 +60,7 @@ export function calculateGoalsCostsF(goals) {
                 goalsCosts = goalsCosts + cost;
             }
     
-            return goalsCosts;
+            return Number(goalsCosts);
         };
 
     } catch (error) {
@@ -119,7 +119,7 @@ export function calculateGoalsCostsPerMonthF(goals) {
     
             }
     
-            return costOfGoalsPerMonth.toFixed();
+            return Number(costOfGoalsPerMonth.toFixed());
         };
 
     } catch (error) {
@@ -133,12 +133,15 @@ export function calculateCapitalNeededF(goalsCostPerMonth, gExpenses, desiredInt
     try {
 
         let totalExpensesPerMonth = Number(goalsCostPerMonth) + Number(gExpenses);
-        let capitalNeeded = (totalExpensesPerMonth * 12) * (100 / desiredInterest);
-    
-        if (capitalNeeded === Infinity || capitalNeeded === null){
+        let yearGoalsCost = Number(totalExpensesPerMonth) * 12;
+        let calculatePercentageInterest = 100 / Number(desiredInterest);
+        let capitalNeeded = yearGoalsCost * calculatePercentageInterest;
+
+
+        if (calculatePercentageInterest === Infinity){
             return 0;
         } else {
-            return capitalNeeded.toFixed();
+            return Number(capitalNeeded.toFixed());
         };
         
     } catch (error) {
@@ -163,7 +166,7 @@ export function calculateEstimatedYearsF(incomes, gExpenses, capitalNeededNewCLI
         if (estimatedYears === Infinity || estimatedYears === null){
             return 0;
         } else {
-            return estimatedYears.toFixed();
+            return Number(estimatedYears.toFixed());
         };
         
     } catch (error) {
@@ -179,7 +182,7 @@ export function calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded
         let differenceCLI = currentCLI / futureCLI;
         let capitalNeededWithCLI = capitalNeeded / differenceCLI;
     
-        return capitalNeededWithCLI.toFixed();
+        return Number(capitalNeededWithCLI.toFixed());
         
     } catch (error) {
         console.log(error.message);

@@ -19,8 +19,8 @@ initInterceptor();
 function App() {
 
   useEffect(() => {
+    setLogged(true);
     async function initInterceptor() {
-      setLogged(true);
       if (!getToken()) {
         setLogged(false);
         return console.log("no token");
@@ -47,25 +47,25 @@ function App() {
           <GoalsList logged={logged} handleLogged={handleLogged} />
         </Route>
         <Route path="/edit/:id" render={(props) => <CreateGoal {...props} />}/>
-        <Route path="/create">
+        <Route path="/create" exact>
           <CreateGoal />
         </Route>
-        <Route path="/expenses">
+        <Route path="/expenses" exact>
           <ShowExpenses />
         </Route>
         <Route path="/expenses/edit/:id">
           <InputExpenses />
         </Route>
-        <Route path="/expenses/create">
+        <Route path="/expenses/create" exact>
           <InputExpenses />
         </Route>
-        <Route path="/calculator">
+        <Route path="/calculator" exact>
           <Calculator />
         </Route>
-        <Route path="/log">
+        <Route path="/log" exact>
           <Login handleLogged={handleLogged} />
         </Route>
-        <Route path="/reg">
+        <Route path="/reg" exact>
           <Register handleLogged={handleLogged} />
         </Route>
         

@@ -28,7 +28,9 @@ function CreateGoal(props) {
           setCurrentDate(new Date(data.currentDate));
           setIsEdit(true);
           setIdEditing(props.match.params.id);
-        };
+        } else {
+          setIsEdit(false);
+        }
 
         setLoader(false);
 

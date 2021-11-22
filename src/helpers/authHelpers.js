@@ -1,11 +1,14 @@
 import Axios from 'axios';
 
 export function getToken() {
-    return localStorage.getItem('token');
+    let token = document.cookie.split('=')[1];
+    return token;
 };
 
 export function deleteToken() {
-    localStorage.removeItem('token');
+    let date = new Date();
+    date.setTime(date.getTime() -10);
+    document.cookie = `token=; expires=${date.toGMTString()}`;
 };
 
 export function initInterceptor() {

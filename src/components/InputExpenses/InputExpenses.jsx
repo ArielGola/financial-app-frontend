@@ -11,7 +11,7 @@ function InputExpenses(props) {
     async function getData() {
       try {
 
-        if (props.match.params.id) {
+        if (window.location.pathname.includes('edit')) {
           
           const response = await Axios.get(
             "http://localhost:4000/api/financial/expenses"
@@ -40,6 +40,9 @@ function InputExpenses(props) {
 
       } catch (error) {
         setErrorGet(true);
+        console.log(error);
+      } finally {
+        setLoader(false);
       }
     };
 
