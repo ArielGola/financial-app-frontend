@@ -18,7 +18,7 @@ function NavMenu(props) {
 
       handleLoggedNavMenu(false);
 
-      history.push("/expenses");
+      history.push("/create");
       
     } catch (error) {
       console.log(error.message);

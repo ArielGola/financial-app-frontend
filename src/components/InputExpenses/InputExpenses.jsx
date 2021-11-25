@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
+import { getToken } from "../../helpers/authHelpers";
 
 import Loader from "../Loader/Loader";
 
-function InputExpenses(props) {
+function InputExpenses() {
 
   useEffect(() => {
+
+    function isLogged() {
+      if (getToken()) {
+        setLogged(true);
+      };
+      if (!getToken()) {
+        setLogged(false);
+      };
+    };
+
 
     async function getData() {
       try {
 
         if (window.location.pathname.includes('edit')) {
-          
+
           const response = await Axios.get(
             "http://localhost:4000/api/financial/expenses"
           );
@@ -28,15 +39,13 @@ function InputExpenses(props) {
           setMarkets(response.data[0].markets);
           setRestaurants(response.data[0].restaurants);
           setLeisure(response.data[0].leisure);
-          setOthers(response.data.others);
+          setOthers(response.data[0].others);
           setIsEdit(true);
-          setIdEditing(props.match.params.id);
+          setIdEditing(window.location.pathname.split("/")[3]);
   
         } else {
           setIsEdit(false);
         };
-
-        setLoader(false);
 
       } catch (error) {
         setErrorGet(true);
@@ -46,6 +55,8 @@ function InputExpenses(props) {
       }
     };
 
+
+    isLogged();
     getData();
 
   }, []);
@@ -69,6 +80,7 @@ function InputExpenses(props) {
 
   const [errorGet, setErrorGet] = useState(false);
   const [loader, setLoader] = useState(true);
+  const [logged, setLogged] = useState(true);
   
 
   const onSubmit = async (e) => {
@@ -136,13 +148,13 @@ function InputExpenses(props) {
       <Loader />
 
     );
-  } else if (errorGet) {
+  } else if (errorGet || !logged) {
     return (
 
       <div className="col-md-8 offset-md-2">
         <div className="card-body bg-light">
           <h3 className="card-title">There was an error with petition of data</h3>
-          <Link className="btn btn-success btn-block" to="expenses/create">
+          <Link className="btn btn-success btn-block" to="/">
             Click here to go to home page
           </Link>
         </div>
@@ -166,7 +178,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Salary $"
                   name="salary"
-                  value={salary}
+                  defaultValue={salary}
                   onChange={onChangeInput}
                 />
 
@@ -176,7 +188,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Other Income $"
                   name="otherIncome"
-                  value={otherIncome}
+                  defaultValue={otherIncome}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -187,7 +199,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Mortgage $"
                   name="mortgage"
-                  value={mortgage}
+                  defaultValue={mortgage}
                   onChange={onChangeInput}
                 />
 
@@ -197,7 +209,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Rental $"
                   name="rental"
-                  value={rental}
+                  defaultValue={rental}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -208,7 +220,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Childcare $"
                   name="childcare"
-                  value={childcare}
+                  defaultValue={childcare}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -219,7 +231,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Clothing $"
                   name="clothing"
-                  value={clothing}
+                  defaultValue={clothing}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -230,7 +242,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Transport $"
                   name="transport"
-                  value={transport}
+                  defaultValue={transport}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -241,7 +253,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Services $"
                   name="services"
-                  value={services}
+                  defaultValue={services}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -252,7 +264,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Markets $"
                   name="markets"
-                  value={markets}
+                  defaultValue={markets}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -263,7 +275,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Restaurants $"
                   name="restaurants"
-                  value={restaurants}
+                  defaultValue={restaurants}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -274,7 +286,7 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Leisure $"
                   name="leisure"
-                  value={leisure}
+                  defaultValue={leisure}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
@@ -285,18 +297,13 @@ function InputExpenses(props) {
                   className="form-control m-2"
                   placeholder="Others expenses $"
                   name="others"
-                  value={others}
+                  defaultValue={others}
                   onChange={onChangeInput}
                 />
                 <hr className="my-4" />
               </div>
               <button className="btn btn-success">
-                {
-                  !props.match.params.id ?
-                  "Save expenses sheet"
-                  :
-                  "Edit expenses sheet"
-                }
+                Done
               </button>
             </form>
           </div>

@@ -84,7 +84,7 @@ function Register(props) {
 
       <div className="col-md-6 offset-md-3">
         <div className="card-header bg-light">
-          <h3>Create a count</h3>
+          <h3>Create an account</h3>
         </div>
         <div className="card-body bg-light">
           <form onSubmit={onSubmitForm}>
@@ -145,6 +145,7 @@ function Register(props) {
             <hr className="my-2" />
             <button className="btn btn-primary btn-block">Done</button>
           </form>
+          <p className="mt-2">Do you already have an account? <Link to="/log">click here to login</Link></p>
         </div>
       </div>
 

@@ -80,28 +80,27 @@ function Calculator() {
 
 
   const onSubmitFormOne = (e) => {
+    e.preventDefault();
 
 		try {
- 
-      e.preventDefault();
 
-      setEstimatedYears(0);
-
-      let calculateCapitalNeeded = calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest);
-
-			setCapitalNeeded(
-				calculateCapitalNeeded
-			);
-      
+      let calculateCapitalNeeded = calculateCapitalNeededF(
+        goalsCostPerMont,
+        gExpenses,
+        desiredInterest
+      );
+  
+      setCapitalNeeded(calculateCapitalNeeded);
+        
       let calculateEstimatedYears = calculateEstimatedYearsF(
         incomes,
         gExpenses,
         capitalNeededNewCLI,
         calculateCapitalNeeded
       );
-
+  
       setEstimatedYears(calculateEstimatedYears);
-			
+
 		} catch (error) {
 			setErrorGet(true);
 		}
@@ -115,12 +114,10 @@ function Calculator() {
 
 
   const onSubmitFormTwo = (e) => {
-		try {
-		
-			e.preventDefault();
+    e.preventDefault();
 
-      setEstimatedYears(0);
-	
+		try {
+      
       let calculateCostOfLivingPlace = calculateCostOfLivingPlaceF(currentCLI, futureCLI, capitalNeeded);
 
 			setCapitalNeededNewCLI(calculateCostOfLivingPlace);
@@ -142,6 +139,8 @@ function Calculator() {
 
   const clearValues = () => {
 
+    window.scrollTo(0, 0)
+
     setDesiredInterest(0);
     setCapitalNeeded(0);
     setEstimatedYears(0);
@@ -160,8 +159,15 @@ function Calculator() {
     return (
 
       <div className="col-md-8 offset-md-2">
-        <div className="card-body bg-light">
-          <h3 className="card-title">You haven't entered any expenses yet</h3>
+        <div className="card">
+          <div className="card-header">
+            <h2>You haven't entered any expenses yet for calculate the financial freedom</h2>
+          </div>
+          <div className="card-body">
+            <p className="h5 m-2">
+              For create a balance you must be logged or create a count.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -260,7 +266,7 @@ function Calculator() {
                     className="form-control mb-4"
                     placeholder="Ex: Belo Horizonte = 52"
                     onChange={onChangeCLI}
-                    defaultValue={currentCLI}
+                    value={currentCLI}
                   />
                 </div>
                 <div className="form-group">
@@ -274,7 +280,7 @@ function Calculator() {
                     className="form-control mb-2"
                     placeholder="Ex: Toronto = 86"
                     onChange={onChangeCLI}
-                    defaultValue={futureCLI}
+                    value={futureCLI}
                   />
                 </div>
                 <button className="btn btn-primary">Calculate</button>
@@ -287,7 +293,7 @@ function Calculator() {
                 Now you need save money for {estimatedYears} years
               </p>
               <button className="btn btn-primary" onClick={clearValues}>
-                Clear values
+                Clear values or recalculate
               </button>
             </div>
           </div>

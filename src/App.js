@@ -20,12 +20,12 @@ function App() {
 
   useEffect(() => {
     setLogged(true);
+
     async function initInterceptor() {
       if (!getToken()) {
         setLogged(false);
-        return console.log("no token");
       }
-    }
+    };
 
     initInterceptor();
   }, []);

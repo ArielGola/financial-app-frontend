@@ -75,11 +75,18 @@ function ShowExpenses() {
     return (
 
       <div className="col-md-8 offset-md-2">
-        <div className="card-body bg-light">
-          <h3 className="card-title">You haven't entered any expenses yet</h3>
-          <Link className="btn btn-success btn-block" to="expenses/create">
-            Click here to regiser your expenses
-          </Link>
+        <div className="card">
+          <div className="card-header">
+            <h2>You haven't entered any expenses yet</h2>
+          </div>
+          <div className="card-body">
+            <p className="h5 m-2">
+              For create a balance you must be logged or create a count.
+            </p>
+            <Link className="btn btn-success btn-block" to="/log">
+              Click here to login your count.
+            </Link>
+          </div>
         </div>
       </div>
 
