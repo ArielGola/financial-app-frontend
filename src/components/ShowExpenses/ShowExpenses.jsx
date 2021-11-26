@@ -1,11 +1,15 @@
+// Modules
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
+// Components
 import Loader from "../Loader/Loader";
 
 function ShowExpenses() {
+
   useEffect(() => {
+
     async function getExpenses() {
       try {
         
@@ -23,23 +27,28 @@ function ShowExpenses() {
     };
 
     getExpenses();
+
   }, []);
+
 
   const [expenses, setExpenses] = useState([]);
   const [balance, setBalance] = useState(0);
   const [loader, setLoader] = useState(true);
   const [errorGet, setErrorGet] = useState(false);
 
+
   function getBalance(expenses) {
     try {
 
       let mortgageRental;
+
       if (expenses[0].apartment.mortgage) {
         mortgageRental = expenses[0].apartment.mortgage;
       }
       if (expenses[0].apartment.rental) {
         mortgageRental = expenses[0].apartment.rental;
       }
+      
       const totalExpenses =
         Number(mortgageRental) +
         Number(expenses[0].childcare) +

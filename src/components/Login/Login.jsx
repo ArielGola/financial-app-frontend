@@ -1,3 +1,4 @@
+// Modules
 import React, { useState } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
@@ -72,7 +73,7 @@ function Login(props) {
       <div className="col-md-8 offset-md-2">
         <div className="card-body bg-light">
           <h3 className="card-title">There was an error with the user sing in</h3>
-          <Link className="btn btn-success btn-block" to="expenses/create">
+          <Link className="btn btn-success btn-block" to="/home">
             Click here to go to home page
           </Link>
         </div>

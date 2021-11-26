@@ -1,5 +1,7 @@
+// Modules
 import React from 'react';
 
+// Styles
 import "./Loader.css";
 
 function Loader() {

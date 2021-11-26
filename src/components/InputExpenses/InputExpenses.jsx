@@ -1,14 +1,19 @@
+// Modules
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
+
+// Helpers
 import { getToken } from "../../helpers/authHelpers";
 
+// Components
 import Loader from "../Loader/Loader";
 
 function InputExpenses() {
 
   useEffect(() => {
 
+    // Handle logged state
     function isLogged() {
       if (getToken()) {
         setLogged(true);
@@ -49,7 +54,6 @@ function InputExpenses() {
 
       } catch (error) {
         setErrorGet(true);
-        console.log(error);
       } finally {
         setLoader(false);
       }
@@ -81,8 +85,9 @@ function InputExpenses() {
   const [errorGet, setErrorGet] = useState(false);
   const [loader, setLoader] = useState(true);
   const [logged, setLogged] = useState(true);
-  
 
+  
+  // Data structure and sending
   const onSubmit = async (e) => {
     try {
       
@@ -126,6 +131,7 @@ function InputExpenses() {
     }
   };
 
+  // States handling to inputs data
   const onChangeInput = (e) => {
     if (e.target.name === "salary") setSalary(e.target.value);
     if (e.target.name === "otherIncome") setOtherIncome(e.target.value);

@@ -1,38 +1,48 @@
+// Modules
 import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { format } from "timeago.js";
 
+// Components
 import Loader from "../Loader/Loader";
 
 function GoalsList() {
 
   useEffect(() => {
+
     getGoals();
+
   }, []);
 
   const [goals, setGoals] = useState([]);
   const [loader, setLoader] = useState(true);
   const [errorGet, setErrorGet] = useState(false);
 
+
   const getGoals = useCallback(async () => {
     try {
+
       const response = await Axios.get(
         "http://localhost:4000/api/financial/goals"
       );
 
       setLoader(false);
       setGoals(response.data);
+
     } catch (error) {
       setGoals(false);
       setErrorGet(true);
     }
   });
 
+  
   const deleteGoal = async (id) => {
     try {
+
       await Axios.delete("http://localhost:4000/api/financial/goals/" + id);
       getGoals();
+
     } catch (error) {
       setErrorGet(true);
     }

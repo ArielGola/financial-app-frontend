@@ -1,16 +1,22 @@
+// Modules
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+
+// Helpers
 import { deleteToken } from '../../helpers/authHelpers';
+
 
 function NavMenu(props) {
 
   let history = useHistory();
 
+  // Handle state of App.js
   const handleLoggedNavMenu = (value) => {
     const changeLogged = props.handleLogged;
     changeLogged(value);
   };
 
+  // Logout
   const deleteSession = () => {
     try {
       
@@ -24,6 +30,7 @@ function NavMenu(props) {
       console.log(error.message);
     }
   };
+
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -61,7 +68,6 @@ function NavMenu(props) {
 
         <div className="float-right">
           {
-            //!isLogged ? (
             !props.logged ? (
               <div className="navbar-nav float-right">
                 <Link className="nav-link" to="/log">
@@ -72,33 +78,13 @@ function NavMenu(props) {
                 </Link>
               </div>
             ) : (
-              <div className="float-right">
-                <button className="btn btn-info" onClick={deleteSession}>
+              <div className="navbar-nav float-right">
+                <a className="nav-link" onClick={deleteSession}>
                   Logout
-                </button>
+                </a>
               </div>
             )
           }
-        </div>
-
-        <div className="btn-group dropleft">
-          <button
-            type="button"
-            className="btn btn-primary dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            User
-          </button>
-          <div className="dropdown-menu">
-            <Link className="dropdown-item" to="/users">
-              View Users
-            </Link>
-            <Link className="dropdown-item" to="/profile">
-              User Profile
-            </Link>
-          </div>
         </div>
       </div>
     </nav>

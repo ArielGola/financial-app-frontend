@@ -1,5 +1,8 @@
+// Modules
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+
+// Helpers
 import {
   calculateIncomesF,
   calculateExpensesF,
@@ -10,6 +13,7 @@ import {
   calculateCostOfLivingPlaceF,
 } from "../../helpers/calculatorCompHelpers";
 
+// Components
 import Loader from "../Loader/Loader";
 
 
@@ -79,6 +83,7 @@ function Calculator() {
   };
 
 
+  // Form of interes
   const onSubmitFormOne = (e) => {
     e.preventDefault();
 
@@ -113,6 +118,7 @@ function Calculator() {
   };
 
 
+  // Form of CLI
   const onSubmitFormTwo = (e) => {
     e.preventDefault();
 

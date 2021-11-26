@@ -1,12 +1,15 @@
+// Modules
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
-
 import DatePickerR from 'react-datepicker';
 
+// Components
 import Loader from "../Loader/Loader";
 
+// Styles
 import "react-datepicker/dist/react-datepicker.css";
+
 
 function CreateGoal(props) {
   
@@ -15,6 +18,7 @@ function CreateGoal(props) {
     async function getData() {
       try {
         
+        // Manage => Edit on || Edit off
         if (window.location.pathname.includes('edit')) {
           const response = await Axios.get(
             "http://localhost:4000/api/financial/goals/" + props.match.params.id

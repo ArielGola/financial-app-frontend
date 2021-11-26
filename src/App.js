@@ -1,10 +1,15 @@
-import './App.css';
-import "bootswatch/dist/flatly/bootstrap.min.css";
+// Modules
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+// Helpers
 import { getToken, initInterceptor } from './helpers/authHelpers.js';
 
+// Styles
+import './App.css';
+import "bootswatch/dist/flatly/bootstrap.min.css";
+
+// Components
 import NavMenu from './components/NavMenu/NavMenu';
 import GoalsList from './components/GoalsList/GoalsList';
 import CreateGoal from './components/CreateGoal/CreateGoal';
@@ -19,6 +24,7 @@ initInterceptor();
 function App() {
 
   useEffect(() => {
+
     setLogged(true);
 
     async function initInterceptor() {
@@ -28,9 +34,12 @@ function App() {
     };
 
     initInterceptor();
+    
   }, []);
 
+
   const [logged, setLogged] = useState(false);
+
 
   const handleLogged = (value) => {
     setLogged(value);
@@ -46,25 +55,33 @@ function App() {
         <Route path="/" exact >
           <GoalsList logged={logged} handleLogged={handleLogged} />
         </Route>
+
         <Route path="/edit/:id" render={(props) => <CreateGoal {...props} />}/>
+
         <Route path="/create" exact>
           <CreateGoal />
         </Route>
+
         <Route path="/expenses" exact>
           <ShowExpenses />
         </Route>
+
         <Route path="/expenses/edit/:id">
           <InputExpenses />
         </Route>
+
         <Route path="/expenses/create" exact>
           <InputExpenses />
         </Route>
+
         <Route path="/calculator" exact>
           <Calculator />
         </Route>
+
         <Route path="/log" exact>
           <Login handleLogged={handleLogged} />
         </Route>
+
         <Route path="/reg" exact>
           <Register handleLogged={handleLogged} />
         </Route>
