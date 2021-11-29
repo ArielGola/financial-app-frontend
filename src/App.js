@@ -18,6 +18,7 @@ import Calculator from './components/Calculator/Calculator';
 import InputExpenses from './components/InputExpenses/InputExpenses';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import HomeInfo from "./components/HomeInfo/HomeInfo";
 
 initInterceptor();
 
@@ -52,8 +53,12 @@ function App() {
 
       <div className="contaier p-4">
         
-        <Route path="/" exact >
+        <Route path="/goals" exact >
           <GoalsList logged={logged} handleLogged={handleLogged} />
+        </Route>
+
+        <Route path="/home" exact >
+          <HomeInfo />
         </Route>
 
         <Route path="/edit/:id" render={(props) => <CreateGoal {...props} />}/>

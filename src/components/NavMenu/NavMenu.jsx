@@ -24,7 +24,7 @@ function NavMenu(props) {
 
       handleLoggedNavMenu(false);
 
-      history.push("/create");
+      history.push("/home");
       
     } catch (error) {
       console.log(error.message);
@@ -35,7 +35,7 @@ function NavMenu(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/#">
+        <Link className="navbar-brand" to="/home">
           FINANCIAL
         </Link>
         <button
@@ -51,8 +51,11 @@ function NavMenu(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link className="nav-link" to="/#">
+            <Link className="nav-link" to="/home">
               Home
+            </Link>
+            <Link className="nav-link" to="/goals">
+              Goals
             </Link>
             <Link className="nav-link" to="/create">
               Creata A Goal
@@ -79,9 +82,9 @@ function NavMenu(props) {
               </div>
             ) : (
               <div className="navbar-nav float-right">
-                <a className="nav-link" onClick={deleteSession}>
+                <Link className="nav-link" onClick={deleteSession} to="#">
                   Logout
-                </a>
+                </Link>
               </div>
             )
           }

@@ -20,46 +20,11 @@ import Loader from "../Loader/Loader";
 function Calculator() {
 
   useEffect(() => {
-		
-		async function getData() {
-			try {
-				
-				const expenses = await Axios.get(
-					"http://localhost:4000/api/financial/expenses"
-				);
-		
-				const goalsAxios = await Axios.get(
-					"http://localhost:4000/api/financial/goals"
-				);
-		
-				setExpenses(expenses.data);
-				setGoals(goalsAxios.data);
-		
-				setgExpenses(
-					calculateExpensesF(expenses.data)
-				);
-				setIncomes(
-					calculateIncomesF(expenses.data)
-				);
-				setgGoalsCost(
-					calculateGoalsCostsF(goalsAxios.data)
-				);
-				setGoalsCostPerMont(
-					calculateGoalsCostsPerMonthF(goalsAxios.data)
-				);
-				setCapitalNeeded(
-					calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
-				);
-				setLoader(false);
-				
-			} catch (error) {
-				setErrorGet(true);
-			}
-		};
 
-    getData();
+    getData(); 
 
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); 
 
 	
   const [expenses, setExpenses] = useState([]);
@@ -80,6 +45,43 @@ function Calculator() {
 
   const onChangeInteres = (e) => {
     setDesiredInterest(e.target.value);
+  };
+  
+		
+  async function getData() { 
+    try {
+      
+      const expenses = await Axios.get(
+        "http://localhost:4000/api/financial/expenses"
+      );
+  
+      const goalsAxios = await Axios.get(
+        "http://localhost:4000/api/financial/goals"
+      );
+  
+      setExpenses(expenses.data);
+      setGoals(goalsAxios.data);
+  
+      setgExpenses(
+        calculateExpensesF(expenses.data)
+      );
+      setIncomes(
+        calculateIncomesF(expenses.data)
+      );
+      setgGoalsCost(
+        calculateGoalsCostsF(goalsAxios.data)
+      );
+      setGoalsCostPerMont(
+        calculateGoalsCostsPerMonthF(goalsAxios.data)
+      );
+      setCapitalNeeded(
+        calculateCapitalNeededF(goalsCostPerMont, gExpenses, desiredInterest)
+      );
+      setLoader(false);
+      
+    } catch (error) {
+      setErrorGet(true);
+    }
   };
 
 

@@ -20,8 +20,10 @@ function CreateGoal(props) {
         
         // Manage => Edit on || Edit off
         if (window.location.pathname.includes('edit')) {
+          let id = props.match.params.id;
+
           const response = await Axios.get(
-            "http://localhost:4000/api/financial/goals/" + props.match.params.id
+            "http://localhost:4000/api/financial/goals/" + id
           );
           const data = response.data;
     
@@ -31,7 +33,7 @@ function CreateGoal(props) {
           setDeadline(new Date(data.deadline));
           setCurrentDate(new Date(data.currentDate));
           setIsEdit(true);
-          setIdEditing(props.match.params.id);
+          setIdEditing(id);
         } else {
           setIsEdit(false);
         }
@@ -45,6 +47,7 @@ function CreateGoal(props) {
 
     getData();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let history = useHistory();

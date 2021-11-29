@@ -1,5 +1,5 @@
 // Modules
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { format } from "timeago.js";
@@ -13,6 +13,7 @@ function GoalsList() {
 
     getGoals();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [goals, setGoals] = useState([]);
@@ -20,7 +21,7 @@ function GoalsList() {
   const [errorGet, setErrorGet] = useState(false);
 
 
-  const getGoals = useCallback(async () => {
+  const getGoals = async () => { 
     try {
 
       const response = await Axios.get(
@@ -34,7 +35,7 @@ function GoalsList() {
       setGoals(false);
       setErrorGet(true);
     }
-  });
+  }; 
 
   
   const deleteGoal = async (id) => {
@@ -101,7 +102,7 @@ function GoalsList() {
               <div className="card-footer d-flex justify-content-between">
                 <div className="d-flex align-items-center">
                   <p>
-                    {format(goal.currentDate)} // {format(goal.deadline)}
+                    {format(goal.currentDate) + " // " + format(goal.deadline)}
                   </p>
                 </div>
                 <div>
