@@ -88,7 +88,7 @@ function CreateGoal(props) {
         await Axios.post("http://localhost:4000/api/financial/goals", newGoal);
       }
 
-      history.push("/");
+      history.push("/goals");
       
     } catch (error) {
       setErrorGet(true);

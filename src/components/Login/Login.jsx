@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 
+// Styles
+import "./Login.css";
+
 function Login(props) {
 
   let history = useHistory();
@@ -51,15 +54,16 @@ function Login(props) {
         now.setTime(expireTime);
 
         const response = await Axios.post("http://localhost:4000/api/users/usr/log", logUser);
+        console.log(response);
         document.cookie = `token=${response.data.token}; expires=${now.toUTCString}`;
         
         handleLoggedLogin(true);
+
+        history.push("/");
         
       } catch (error) {
         setErrorGet(true);
-      } finally {
-        history.push("/");
-      }
+      };
 
     } catch (error) {
       setErrorGet(true);
@@ -70,12 +74,25 @@ function Login(props) {
   if (errorGet) {
     return (
 
-      <div className="col-md-8 offset-md-2">
-        <div className="card-body bg-light">
-          <h3 className="card-title">There was an error with the user sing in</h3>
-          <Link className="btn btn-success btn-block" to="/home">
-            Click here to go to home page
-          </Link>
+      <div className="col-md-8 offset-md-2 margin-top">
+        <div className="card">
+          <div className="card-header">
+            <h2>There´s was a error with user sign in</h2>
+          </div>
+          <div className="card-body">
+            <p className="h5 m-2">
+              Try it again
+            </p>
+            <p className="lead m-2">
+              <Link to="/home" className="text-primary">
+                <b>Click here for go to home page</b>
+              </Link>
+              or
+              <Link to="/reg" className="text-primary">
+                <b> click here for create a account.</b>
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -83,7 +100,7 @@ function Login(props) {
   } else {
     return (
   
-      <div className="col-md-6 offset-md-3">
+      <div className="col-md-6 offset-md-3 margin-top">
         <div className="card-header bg-light">
           <h3>Login your account</h3>
         </div>

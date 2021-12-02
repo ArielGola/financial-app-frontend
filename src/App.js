@@ -1,6 +1,6 @@
 // Modules
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 // Helpers
 import { getToken, initInterceptor } from './helpers/authHelpers.js';
@@ -52,6 +52,10 @@ function App() {
       <NavMenu logged={logged} handleLogged={handleLogged} />
 
       <div className="contaier p-4">
+
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
         
         <Route path="/goals" exact >
           <GoalsList logged={logged} handleLogged={handleLogged} />

@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 
+// Styles
+import "./Register.css";
+
 function Register(props) {
 
   let history = useHistory();
@@ -70,12 +73,25 @@ function Register(props) {
   if (errorGet) {
     return (
 
-      <div className="col-md-8 offset-md-2">
-        <div className="card-body bg-light">
-          <h3 className="card-title">There was an error with the user registration</h3>
-          <Link className="btn btn-success btn-block" to="/home">
-            Click here to go to home page
-          </Link>
+      <div className="col-md-8 offset-md-2 margin-top">
+        <div className="card">
+          <div className="card-header">
+            <h2>There´s was a error with user sign up</h2>
+          </div>
+          <div className="card-body">
+            <p className="h5 m-2">
+              Try it again
+            </p>
+            <p className="lead m-2">
+              <Link to="/home" className="text-primary">
+                <b>Click here for go to home page</b>
+              </Link>
+              or
+              <Link to="/log" className="text-primary">
+                <b> click here for sign in your account.</b>
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -83,7 +99,7 @@ function Register(props) {
   } else {
     return (
 
-      <div className="col-md-6 offset-md-3">
+      <div className="col-md-6 offset-md-3 margin-top">
         <div className="card-header bg-light">
           <h3>Create an account</h3>
         </div>

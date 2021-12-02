@@ -1,0 +1,24 @@
+.align {
+    width: 130px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.align-on-right {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.hidden-coll {
+    display: none;
+}
+
+
+@media (min-width: 992px) {
+    .hidden-coll {
+        display: flex;
+    }  
+}

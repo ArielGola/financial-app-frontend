@@ -92,9 +92,15 @@ function ShowExpenses() {
             <p className="h5 m-2">
               For create a balance you must be logged or create a count.
             </p>
-            <Link className="btn btn-success btn-block" to="/log">
-              Click here to login your count.
-            </Link>
+            <p className="lead m-2">
+              <Link to="/log" className="text-primary">
+                <b>Click here for login </b>
+              </Link>
+              or
+              <Link to="/reg" className="text-primary">
+                <b> click here for create a count.</b>
+              </Link>
+            </p>
           </div>
         </div>
       </div>
