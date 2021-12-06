@@ -1,8 +1,45 @@
-.align {
-    width: 130px;
+.back-dark {
+    background-color: rgb(10, 23, 59);
+}
+
+.flexin {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.back-icon-navbar {
+    width: 50px;
+    height: 50px;
+    background-image: url("./android-chrome-192x192.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5%;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+}
+
+.link:hover {
+    color: rgb(199, 199, 199);
+}
+
+.margin-l {
+    margin-left: 20px;
+}
+
+.align {
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 

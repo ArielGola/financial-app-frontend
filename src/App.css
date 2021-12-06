@@ -1,0 +1,7 @@
+.background {
+    min-height: 90vh;
+    background-image: url("./img/back1.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}

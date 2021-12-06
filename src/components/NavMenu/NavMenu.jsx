@@ -60,12 +60,10 @@ function NavMenu(props) {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <div className="align-on-right" id="ContainerFlex">
-          <Link className="navbar-brand" to="/home">
-            FINANCIAL
-          </Link>
+    <nav className="navbar navbar-expand-lg navbar-dark back-dark">
+      <div className="container flexin">
+        <div className="align-on-right">
+          <Link className="navbar-brand back-icon-navbar" to="/home"></Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -81,19 +79,19 @@ function NavMenu(props) {
         
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link className="nav-link" to="/home">
+              <Link className="link margin-l" to="/home">
                 Home
               </Link>
-              <Link className="nav-link" to="/goals">
+              <Link className="link margin-l" to="/goals">
                 Goals
               </Link>
-              <Link className="nav-link" to="/create">
-                Creata A Goal
+              <Link className="link margin-l" to="/create">
+                Create a Goal
               </Link>
-              <Link className="nav-link" to="/expenses">
+              <Link className="link margin-l" to="/expenses">
                 My Expenses
               </Link>
-              <Link className="nav-link" to="/calculator">
+              <Link className="link margin-l" to="/calculator">
                 Calculate
               </Link>
             </div>
@@ -102,17 +100,17 @@ function NavMenu(props) {
           <div>
             {
               !props.logged ? (
-                <div className="navbar-nav align">
-                  <Link className="nav-link" to="/log">
+                <div className="align">
+                  <Link className="link margin-l" to="/log">
                     Login
                   </Link>
-                  <Link className="nav-link" to="/reg">
+                  <Link className="link margin-l" to="/reg">
                     Register
                   </Link>
                 </div>
               ) : (
                 <div className="navbar-nav">
-                  <Link className="nav-link" onClick={deleteSession} to="#">
+                  <Link className="link" onClick={deleteSession} to="#">
                     Logout
                   </Link>
                 </div>

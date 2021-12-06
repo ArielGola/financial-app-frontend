@@ -2,7 +2,7 @@ import React from 'react';
 
 function HomeInfo() {
     return (
-        <div className="col-md-12">
+        <div className="container col-md-12">
         <div className="card">
           <div className="card-header">
             <h3>What is "financial freedom"?</h3>

@@ -19,6 +19,7 @@ import InputExpenses from './components/InputExpenses/InputExpenses';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import HomeInfo from "./components/HomeInfo/HomeInfo";
+import Footer from "./components/Footer/Footer";
 
 initInterceptor();
 
@@ -51,7 +52,7 @@ function App() {
 
       <NavMenu logged={logged} handleLogged={handleLogged} />
 
-      <div className="contaier p-4">
+      <div className="contaier p-4 background">
 
         <Route path="/" exact>
           <Redirect to="/home" />
@@ -96,6 +97,8 @@ function App() {
         </Route>
         
       </div>
+
+      <Footer />
 
     </Router>
   );
