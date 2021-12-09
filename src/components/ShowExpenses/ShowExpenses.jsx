@@ -1,12 +1,14 @@
 // Modules
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 
 // Components
 import Loader from "../Loader/Loader";
 
 function ShowExpenses() {
+
+  let history = useHistory();
 
   useEffect(() => {
 
@@ -74,6 +76,14 @@ function ShowExpenses() {
   }
 
 
+  function deleteExpenses(id) {
+    Axios.delete("http://localhost:4000/api/financial/expenses/" + id);
+
+    window.scrollTo(0, 0)
+
+    history.push('/goals');
+  };
+
   if (loader === true) {
     return (
 
@@ -91,6 +101,11 @@ function ShowExpenses() {
           <div className="card-body">
             <p className="h5 m-2">
               For create a balance you must be logged or create a count.
+            </p>
+            <p className="lead m-2">
+              <Link to="/expenses/create" className="btn btn-primary">
+                Click here for create a balance of expenses
+              </Link>
             </p>
             <p className="lead m-2">
               <Link to="/log" className="text-primary">
@@ -145,13 +160,18 @@ function ShowExpenses() {
                 <hr className="my-4" />
               </div>
             </div>
-            <div className="card-footer d-flex align-content-between">
+            <div className="card-footer">
               <Link
                 className="btn btn-success btn-block"
                 to={"/expenses/edit/" + exp._id}
               >
                 Edit
               </Link>
+            </div>
+            <div className="card-footer"> 
+              <button className="btn btn-danger btn-block" onClick={() => deleteExpenses(exp._id)}>
+                Delete
+              </button>
             </div>
             <div className="card-footer">
               <p>- You can have one balance of expenses.</p>

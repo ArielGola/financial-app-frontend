@@ -48,12 +48,10 @@ function NavMenu(props) {
     if (String(division).includes(".")) {
 
       navbarCollapse.className = "navbar-collapse collapse show";
-      console.log(navbarCollapse);
 
     } else {
 
       navbarCollapse.className = "hidden-coll";
-      console.log(navbarCollapse);
 
     }
   };

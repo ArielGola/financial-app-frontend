@@ -174,7 +174,12 @@ function Calculator() {
           </div>
           <div className="card-body">
             <p className="h5 m-2">
-              For create a balance you must be logged or create a count.
+              For calculate your must be logged and have a balance of expenses.
+            </p>
+            <p className="lead m-2">
+              <Link to="/expenses/create" className="btn btn-primary">
+                Click here for create a balance of expenses
+              </Link>
             </p>
             <p className="lead m-2">
               <Link to="/log" className="text-primary">
@@ -303,11 +308,11 @@ function Calculator() {
                 </div>
                 <button className="btn btn-primary">Calculate</button>
               </form>
-              <p className="mt-4 h5">
+              <p className="mt-4 h5 font-weight-normal">
                 If you change your place to live, the new necessary invested
                 capital would be ${capitalNeededNewCLI}
               </p>
-              <p className="h5">
+              <p className="mb-4 h5 font-weight-normal">
                 Now you need save money for {estimatedYears} years
               </p>
               <button className="btn btn-primary" onClick={clearValues}>
