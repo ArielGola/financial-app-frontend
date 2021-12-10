@@ -5,19 +5,19 @@ function HomeInfo() {
         <div className="container col-md-12">
         <div className="card">
           <div className="card-header">
-            <h3>What is "financial freedom"?</h3>
+            <h4>What is "financial freedom"?</h4>
           </div>
           <div className="card-body">
-            <p className="h5 m-4">
+            <p className="lead m-4">
             Financial independence is the status of having enough income to pay one's living expenses for the rest of one's life without having to be employed or dependent on others.
             </p>
           </div>
 
           <div className="card-header">
-            <h3>- What is this app?</h3>
+            <h4>- What is this app?</h4>
           </div>
           <div className="card-body">
-            <p className="h5 m-4">
+            <p className="lead m-4">
             This app helps you to keep track of your expenses and of course to calculate how much you have to save for your financial freedom. It should be noted that the calculation of total money is from a single investment amount, that is, the money is calculated having invested everything at once.
             </p>
             <p className="lead m-4">
